@@ -12,7 +12,7 @@
         <h1 class="text-4xl font-bold mb-4">Welcome to Service Booking App</h1>
         <p class="text-lg text-gray-600 max-w-xl mb-6">
             Book services with ease. Whether you're a customer looking for top-rated services or a vendor managing your
-            schedule, we’ve got you covered.
+            schedule, we've got you covered.
         </p>
 
         <div class="flex gap-4">

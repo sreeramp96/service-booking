@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AvailabilityController;
@@ -36,11 +37,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/customer/dashboard', function () {
         return view('dashboards.customer');
     })->name('customer.dashboard');
+
+    Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+
+    Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
 });
 
 Route::middleware(['auth'])->get('/customer/dashboard', function () {
     $bookings = auth()->user()->bookings()->with('service', 'availability')->latest()->take(5)->get();
-
     return view('dashboards.customer', compact('bookings'));
 })->name('customer.dashboard');
 
