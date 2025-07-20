@@ -3,9 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -70,5 +70,62 @@ class User extends Authenticatable
     public function services()
     {
         return $this->hasMany(Service::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function favoriteServices()
+    {
+        return $this->belongsToMany(Service::class, 'favorites');
+    }
+
+    public function customerConversations()
+    {
+        return $this->hasMany(Conversation::class, 'customer_id');
+    }
+
+    public function providerConversations()
+    {
+        return $this->hasMany(Conversation::class, 'provider_id');
+    }
+
+    public function conversations()
+    {
+        return $this->customerConversations()->union($this->providerConversations());
+    }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    // Helper methods
+    public function hasFavorited($serviceId)
+    {
+        return $this->favorites()->where('service_id', $serviceId)->exists();
+    }
+
+    public function hasReviewed($bookingId)
+    {
+        return $this->reviews()->where('booking_id', $bookingId)->exists();
+    }
+
+    public function getUnreadMessagesCount()
+    {
+        return Message::whereHas('conversation', function ($query) {
+            $query->where('customer_id', $this->id)
+                ->orWhere('provider_id', $this->id);
+        })
+            ->where('sender_id', '!=', $this->id)
+            ->whereNull('read_at')
+            ->count();
     }
 }

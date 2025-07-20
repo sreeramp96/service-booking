@@ -32,4 +32,26 @@ class BookingController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Booking successful!');
     }
+    public function rebook(Booking $booking)
+    {
+        // Check if user owns this booking
+        if ($booking->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // Redirect to the service's slots page for rebooking
+        return redirect()->route('services.slots', $booking->service)
+            ->with('success', 'Choose a new slot for rebooking ' . $booking->service->name);
+    }
+
+    // Also add this helper method to show booking history
+    public function history()
+    {
+        $bookings = auth()->user()->bookings()
+            ->with(['service.user', 'availability', 'review'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('bookings.history', compact('bookings'));
+    }
 }
