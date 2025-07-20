@@ -31,7 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/services/{service}/book/{availability}', [BookingController::class, 'book'])->name('services.book');
 
     Route::get('/provider/dashboard', function () {
-        return view('dashboards.provider');
+        $services = auth()->user()->services;
+        return view('dashboards.provider', compact('services'));
     })->name('provider.dashboard');
 
     Route::get('/customer/dashboard', function () {
