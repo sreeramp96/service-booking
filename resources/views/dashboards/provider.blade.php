@@ -1,4 +1,3 @@
-{{-- {{ dd($services) }} --}}
 <x-app-layout>
     <div class="max-w-6xl mx-auto mt-10 px-4 space-y-6">
         <div class="bg-gradient-to-r from-green-100 to-green-200 p-6 rounded shadow flex justify-between items-center">
@@ -15,7 +14,7 @@
                     class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">+ Add Service</a>
             </div>
 
-            @if($services->isEmpty())
+            @if ($services->isEmpty())
                 <p class="text-gray-500">You haven't added any services yet.</p>
             @else
                 <ul class="divide-y">
@@ -28,10 +27,9 @@
                                     <p class="text-sm text-gray-800 mt-1">₹{{ $service->price }}</p>
                                 </div>
                                 <div class="flex gap-4 items-center text-sm">
-                                    {{-- <a href="{{ route('availabilities.index', ['service' => $service]) }}" --}} {{--
-                                        class="text-blue-600 hover:underline">📅 Slots</a> --}}
-                                    {{-- <a href="{{ route('services.edit', $service->id) }}" --}} {{--
-                                        class="text-yellow-600 hover:underline">✏️ Edit</a> --}}
+                                    <a href="{{ route('services.availabilities.index', $service) }}">📅 Slots</a>
+                                    <a href="{{ route('services.edit', $service->id) }}"
+                                        class="text-yellow-600 hover:underline">✏️ Edit</a>
                                 </div>
                             </div>
                         </li>

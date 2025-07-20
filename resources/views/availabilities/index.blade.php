@@ -3,7 +3,7 @@
         <h1 class="text-2xl font-bold mb-6">Availability for: {{ $service->name }}</h1>
 
         <div class="flex justify-end mb-4">
-            <a href="{{ route('availabilities.create', $service->id) }}"
+            <a href="{{ route('services.availabilities.create', $service) }}"
                 class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                 + Add Availability
             </a>

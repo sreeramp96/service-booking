@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AvailabilityController;
-use App\Http\Controllers\ProviderDashboardController;
 use App\Http\Controllers\BookingController;
 
 Route::get('/', fn() => view('welcome'));
@@ -18,13 +17,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('services', ServiceController::class);
 
-    Route::prefix('services/{service}')->group(function () {
-        Route::resource('availabilities', AvailabilityController::class)->except(['show']);
-    });
-
-    Route::get('services/{service}/availabilities', [AvailabilityController::class, 'index'])->name('availabilities.index');
+    Route::resource('services.availabilities', AvailabilityController::class)->except(['show']);
 
     Route::get('/services/{service}/slots', [BookingController::class, 'showSlots'])->name('services.slots');
+
     Route::post('/services/{service}/book/{availability}', [BookingController::class, 'book'])->name('services.book');
 
     Route::get('/provider/dashboard', function () {

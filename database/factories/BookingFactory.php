@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Availability;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Booking>
  */
@@ -18,6 +19,7 @@ class BookingFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = fake('en_US');
         $customer = User::factory()->create(['role' => 'customer']);
         $service = Service::factory()->create();
         $availability = Availability::factory()->create(['service_id' => $service->id]);
@@ -26,7 +28,7 @@ class BookingFactory extends Factory
             'user_id' => $customer->id,
             'service_id' => $service->id,
             'availability_id' => $availability->id,
-            'status' => fake()->randomElement(['pending', 'confirmed', 'cancelled']),
+            'status' => $faker->randomElement(['pending', 'confirmed', 'cancelled']),
         ];
     }
 }

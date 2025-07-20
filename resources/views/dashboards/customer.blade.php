@@ -1,8 +1,6 @@
 <x-app-layout>
     <div class="bg-gray-50 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-5xl mx-auto space-y-8">
-
-            {{-- 💡 Welcome / Hero Section --}}
             <div
                 class="bg-gradient-to-r from-blue-100 to-blue-200 p-6 rounded-lg shadow flex items-center justify-between">
                 <div>
@@ -15,7 +13,6 @@
                     class="h-20 hidden md:block opacity-80">
             </div>
 
-            {{-- 📅 Upcoming Bookings --}}
             <div>
                 <h2 class="text-xl font-semibold text-blue-800 mb-4">📅 Your Upcoming Bookings</h2>
 
@@ -30,7 +27,8 @@
                                     {{ \Carbon\Carbon::parse($booking->availability->end_time)->format('H:i') }}
                                 </p>
                             </div>
-                            <span class="text-sm font-medium px-3 py-1 rounded-full
+                            <span
+                                class="text-sm font-medium px-3 py-1 rounded-full
                                             @if ($booking->status === 'confirmed') bg-green-100 text-green-700
                                             @elseif($booking->status === 'pending') bg-yellow-100 text-yellow-700
                                             @else bg-red-100 text-red-700 @endif">
@@ -50,7 +48,7 @@
             </div>
 
             {{-- 🔍 CTA Button --}}
-            @if(count($bookings) > 0)
+            @if (count($bookings) > 0)
                 <div class="text-right">
                     <a href="{{ route('services.index') }}"
                         class="inline-flex items-center bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 shadow font-semibold transition">
