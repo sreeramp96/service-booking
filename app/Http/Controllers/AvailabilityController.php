@@ -48,7 +48,7 @@ class AvailabilityController extends Controller
 
         $service->availabilities()->create($data);
 
-        return redirect()->route('services.availabilities.index', $service)->with('success', 'Slot added.');
+        return redirect()->route('availabilities.index', $service)->with('success', 'Slot added.');
     }
 
     /**
