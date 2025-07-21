@@ -20,7 +20,8 @@
                 <div class="border-b pb-3 mb-3">
                     <p><strong>Date:</strong> {{ $slot->date }}</p>
                     <p><strong>Time:</strong> {{ \Carbon\Carbon::parse($slot->start_time)->format('H:i') }} -
-                        {{ \Carbon\Carbon::parse($slot->end_time)->format('H:i') }}</p>
+                        {{ \Carbon\Carbon::parse($slot->end_time)->format('H:i') }}
+                    </p>
                 </div>
             @empty
                 <p class="text-gray-500">No availability added yet.</p>

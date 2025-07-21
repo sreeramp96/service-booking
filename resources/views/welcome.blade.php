@@ -510,21 +510,21 @@
     </footer>
 
     <script>
-        // Navbar scroll effect
-        // window.addEventListener('scroll', function() {
-        //     const navbar = document.getElementById('navbar');
-        //     if (window.scrollY > 50) {
-        //         navbar.classList.add('bg-white', 'shadow-lg');
-        //         navbar.classList.remove('bg-transparent');
-        //     } else {
-        //         navbar.classList.add('bg-transparent');
-        //         navbar.classList.remove('bg-white', 'shadow-lg');
-        //     }
-        // });
+        Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-white', 'shadow-lg');
+            }
+        });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
