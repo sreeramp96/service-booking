@@ -22,7 +22,7 @@ Route::get('/', function () {
     }
 
     // If not authenticated, show the landing page
-    return view('welcome');
+    return view('index');
 })->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
